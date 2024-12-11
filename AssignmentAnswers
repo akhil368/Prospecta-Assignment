@@ -1,0 +1,39 @@
+Coding Challenge :
+Implement Authentication , Authoriztion and Role Based Authentication.
+Validating Input before storing in DB.
+Provide meaningful but generic error messages to prevent information leakage.
+
+Although I am not able to implement this problem but I have context how to solve this (pseudo code).
+Theoretical Challenge
+1. How will you tackle the challenge above?
+Approach:
+Parse the CSV Input: Read the input data into a structured format(2D array)
+Identify Values vs. Formulas:
+Detect if a cell contains a plain value (numeric or string) or a formula (starts with =).
+Build a Dependency Graph:
+Parse formulas and identify dependencies between cell.
+Use a topological sorting approach to resolve dependencies in the correct order.
+Evaluate Formulas:
+Replace references (e.g., A1) with their resolved values during formula computation.
+
+
+Output Results: Write the computed values back to a CSV format.
+
+
+2. What type of errors would you check for?
+Input Errors:
+Invalid Format: Malformed CSV, missing columns, or inconsistent row lengths.
+Invalid References: References to cells that don’t exist in the input (e.g., Z1 when no column Z exists).
+Invalid Formulas: Unsupported formula syntax, such as missing operators or incorrect referencing.
+Runtime Errors:
+Circular Dependencies: When formulas reference each other in a loop (e.g., A1 depends on B1, which depends on A1).
+Division by Zero: A formula that performs division and encounters zero as the denominator.
+Empty Cells: Formulas referencing empty or uninitialized cells.
+
+
+3. How might a user break your code?
+Circular References: Introduce a loop in the dependencies, causing infinite recursion or iteration.
+Malformed Input: Supply a CSV file with inconsistent data formats, corrupt rows, or invalid formulas.
+Undefined References: Reference a cell that is out of bounds or does not exist.
+Complex Formulas: Use deeply nested or overly complex formulas, exceeding stack or computation limits.
+Incorrect Formula Syntax: Use formulas that are syntactically invalid but still attempt to process (e.g., =A1+).
